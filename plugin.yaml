@@ -1,0 +1,49 @@
+name: zoom-platform
+label: Zoom Team Chat
+kind: platform
+version: 0.1.0
+description: >
+  Zoom Team Chat platform plugin for Hermes Agent.
+  Connects via a Zoom Marketplace Chatbot app: receives inbound messages
+  (DM, channel slash commands, and @mentions) through an authenticated HTTP
+  webhook, and replies through the Chatbot message API. Token management uses
+  the client_credentials OAuth grant (chatbot token, scope imchat:bot).
+author: Porter Liu
+requires_env:
+  - name: ZOOM_CLIENT_ID
+    description: "Client ID from your Zoom Marketplace app's Basic Information page."
+    prompt: "Zoom Client ID"
+    password: true
+  - name: ZOOM_CLIENT_SECRET
+    description: "Client Secret from the app's Basic Information page."
+    prompt: "Zoom Client Secret"
+    password: true
+  - name: ZOOM_BOT_JID
+    description: "Bot JID (robot JID) from the Chat Subscription panel under Features → Surface, e.g. xxx@xmpp.zoom.us."
+    prompt: "Bot JID"
+    password: false
+  - name: ZOOM_SECRET_TOKEN
+    description: "Secret token from Features → Access, used to verify the HMAC signature on inbound webhooks. Enable Signature on the Team Chat Subscription."
+    prompt: "Webhook secret token (HMAC)"
+    password: true
+optional_env:
+  - name: ZOOM_WEBHOOK_PORT
+    description: "Port for the inbound webhook HTTP server (default 8646). Point your tunnel here."
+    prompt: "Webhook port (default 8646)"
+    password: false
+  - name: ZOOM_HOME_CHANNEL
+    description: "Default chat JID for cron / notification delivery (a channel or user JID)."
+    prompt: "Home channel JID (or empty)"
+    password: false
+  - name: ZOOM_HOME_CHANNEL_NAME
+    description: "Display name for the home channel (used together with ZOOM_HOME_CHANNEL; default Home)."
+    prompt: "Home channel display name (default Home)"
+    password: false
+  - name: ZOOM_ALLOWED_USERS
+    description: "Comma-separated user JIDs allowed to talk to the bot."
+    prompt: "Allowed user JIDs (comma-separated)"
+    password: false
+  - name: ZOOM_ALLOW_ALL_USERS
+    description: "Set to true to let any user talk to the bot (overrides the allow-list). Defaults to deny; otherwise new users must pass DM pairing approval."
+    prompt: "Allow all users? (true to disable allow-listing)"
+    password: false
